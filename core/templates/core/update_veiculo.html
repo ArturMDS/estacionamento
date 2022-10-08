@@ -1,16 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Atualizando {{ veiculo }}</title>
-</head>
-<body>
-<form action=" {% url 'core_veiculo_update'  veiculo.id %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
-<a href="{% url 'core_veiculo_delete' veiculo.id %}">Deletar</a>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-</body>
-</html>
+{% block main %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'core_lista_pessoas' %}">Veículos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Atualizando: {{ veiculo }}</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <form action=" {% url 'core_veiculo_update'  veiculo.id %}" method="POST">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit"
+                        class="btn btn-outline-secondary">Salvar</button>
+                <a href="{% url 'core_veiculo_delete' veiculo.id %}"
+                   class="btn btn-outline-danger">Deletar</a>
+                <a href="{% url 'core_lista_veiculos' %}"
+                   class="btn btn-outline-secondary">Voltar</a>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

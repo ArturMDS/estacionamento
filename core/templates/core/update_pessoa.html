@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Atualizando {{ pessoa }}</title>
-</head>
-<body>
-<form action=" {% url 'core_pessoa_update'  pessoa.id %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<a href="{% url 'core_pessoa_delete' pessoa.id %}">Deletar</a>
-</body>
-</html>
+{% block main %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'core_lista_pessoas' %}">Pessoas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Atualizando: {{ pessoa }}</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col">
+            <form action=" {% url 'core_pessoa_update'  pessoa.id %}" method="POST">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-outline-secondary">Salvar</button>
+                <a href="{% url 'core_pessoa_delete' pessoa.id %} "
+                   class="btn btn-outline-danger">Deletar</a>
+                <a href="{% url 'core_lista_pessoas' %}"
+                   class="btn btn-outline-secondary">Voltar</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

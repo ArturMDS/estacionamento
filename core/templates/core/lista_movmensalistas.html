@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Movimento Mensalistas</title>
-</head>
-<body>
-<p>Movimento Mensalistas</p>
+{% extends 'base.html' %}
 
-<ul>
-    {% for movmensalista in movmensalistas %}
-        <li>
-            <a href="{% url 'core_movmensalista_update'  movmensalista.id %}">
-                {{ movmensalista.mensalista }} - {{ movmensalista.dt_pgto }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+{% block main %}
+    <p>Movimento Mensalistas</p>
 
-<form action=" {% url 'core_movmensalista_novo' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Cadastrar</button>
-</form>
-</body>
-</html>
+    <ul>
+        {% for movmensalista in movmensalistas %}
+            <li>
+                <a href="{% url 'core_movmensalista_update'  movmensalista.id %}">
+                    {{ movmensalista.mensalista }} - {{ movmensalista.dt_pgto }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <form action=" {% url 'core_movmensalista_novo' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
+{% endblock %}
